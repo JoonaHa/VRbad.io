@@ -1,0 +1,42 @@
+Guide to forming queries can be found in https://www.digitraffic.fi/rautatieliikenne/#graphql
+
+All currently running VR trains and their location, when speed is over 30km/h:
+{
+  currentlyRunningTrains(where: {operator: {shortCode: {equals: "vr"}}}) {
+    trainNumber
+    departureDate
+    trainLocations(where: {speed: {greaterThan: 30}}, orderBy: {timestamp: DESCENDING}, take: 1) {
+      speed
+      timestamp
+      location
+    }
+  }
+}
+
+
+All currently running trains sorted by their operator and train number:
+{
+  currentlyRunningTrains(orderBy: [{operator:{shortCode:ASCENDING}},{trainNumber:ASCENDING}]) {
+    operator {
+      shortCode
+    }
+    trainNumber
+  }
+}
+
+
+All trains that go through Ylöjärvi:
+{
+  trainsByDepartureDate(departureDate: "2020-10-06", 
+    where: {timeTableRows:{contains:{station:{shortCode:{equals:"YLÖ"}}}}}
+    ) {
+    trainNumber
+    departureDate
+    timeTableRows {
+      station {
+        name
+        uicCode
+      }
+    }
+  }
+}
