@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import sys
 import os
 import requests
@@ -33,14 +34,16 @@ def fetch_train_data(query):
   else:
       raise Exception(f"Query failed to run with a {request.status_code}")
 
+
 def save_data_to_json(file, data):
   if not os.path.isdir("data"):
     os.makedirs("data")
-  
+
   f = open(f"data/{file}.json", "w")
   f.write(json.dumps(data, indent=2))
   f.close()
   print("Data fetching successful!")
+
 
 if __name__ == "__main__":
   user_input = get_user_inputs()
