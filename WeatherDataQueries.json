@@ -1,0 +1,12 @@
+{
+  "start_day": "2020-11-01",
+  "end_day": "2021-10-01",
+  "city_list": [
+    {
+      "city": "Helsinki"
+    },
+    {
+      "city": "Vaasa"
+    }
+  ]
+}
