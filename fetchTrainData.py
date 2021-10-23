@@ -32,6 +32,7 @@ def fetch_train_data(query):
   if request.status_code == 200:
       return request.json()
   else:
+      print(request)
       raise Exception(f"Query failed to run with a {request.status_code}")
 
 
@@ -45,7 +46,11 @@ def save_data_to_json(file, data):
   print("Data fetching successful!")
 
 
+def fetch_and_save_json_data(file_name, query):
+  train_data = fetch_train_data(query)
+  save_data_to_json(file_name, train_data)
+
+
 if __name__ == "__main__":
   user_input = get_user_inputs()
-  train_data = fetch_train_data(user_input[1])
-  save_data_to_json(user_input[0], train_data)
+  fetch_and_save_json_data(user_input[0], user_input[1])

@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 WEATHER_KEY = os.getenv('WEATHER_KEY')
 
-def fetch_train_data(timestamp_start, timestamp_end, city_name):
-  endpoint = f"http://history.openweathermap.org/data/2.5/history/city?q={city_name},FI&type=hour&start={timestamp_start}&end={timestamp_end}&appid={WEATHER_KEY}"
+def fetch_weather_data(lat, lon, time_stamp):
+  endpoint = f"https://history.openweathermap.org/data/3.0/history/timemachine?lat={lat}&lon={lon}&dt={time_stamp}&appid={WEATHER_KEY}"
 
   request = requests.get(endpoint)
   if request.status_code == 200:
@@ -49,5 +49,5 @@ if __name__ == "__main__":
   timestamp_end = int(time.mktime(datetime.datetime.strptime(end_day, "%Y-%m-%d").timetuple()))
   for city in weather_data['city_list']:
     city_name = city['city']
-    train_data = fetch_train_data(timestamp_start, timestamp_end, city_name)
+    train_data = fetch_weather_data(timestamp_start, timestamp_end, city_name)
     save_data_to_json(f"WeatherData_{city_name}_{start_day}_{end_day}", train_data)
