@@ -91,3 +91,4 @@ if __name__ == "__main__":
   station_short_code = "MI"
   weather = collect_weather_data_for_station(station_short_code, date_start, date_end)
   print(weather)
+  print("Temperature:", weather[1632268800]["main"]["temp"], "Kelvin")
