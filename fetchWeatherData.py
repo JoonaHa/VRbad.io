@@ -30,8 +30,8 @@ def get_station_info(station_short_code):
   return {}
     
 
-def fetch_weather_data(start, end, lon, lat):
-  endpoint = f"http://history.openweathermap.org/data/2.5/history/city?lat={lat}&lon={lon}&type=hour&start={start}&end={end}&appid={WEATHER_KEY}"
+def fetch_weather_data(time_stamp, lon, lat):
+  endpoint = f"http://history.openweathermap.org/data/2.5/history/city?lat={lat}&lon={lon}&type=hour&start={time_stamp}&cnt=1&appid={WEATHER_KEY}"
   request = requests.get(endpoint)
   if request.status_code == 200:
       return request.json()
