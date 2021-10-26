@@ -15,6 +15,7 @@ def fetch_weather_data(time_stamp, lon, lat):
   if request.status_code == 200:
       return request.json()
   else:
+      print(request.text)
       raise Exception(f"Query failed to run with a {request.status_code}")
 
 
@@ -35,3 +36,6 @@ def open_weather_data(date):
     f.close()
   
   return data
+
+if __name__ == "__main__":
+  print(fetch_weather_data(1635195600.0, 22.96829, 59.826866))
