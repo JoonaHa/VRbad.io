@@ -1,3 +1,4 @@
+from datetime import datetime
 from dotenv.main import load_dotenv
 import os
 import tweepy
@@ -18,7 +19,13 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 def tweet_station_congested(station, probability):
-    api.update_status(f"VR trains going through {station} are going to be late with a probability of {int(probability * 100)}% #joukkoliikenne #VR")
+    api.update_status(
+f"""VR junat jotka pysähtyvät {station} aseman kautta {str(datetime.today().date())} ovat myöhässä {int(probability * 100)}% todennäköisyydellä.
+
+VR trains that stop in {station} on {str(datetime.today().date())} are going to be late with a probability of {int(probability * 100)}%
+ 
+#joukkoliikenne"""
+    )
 
 if __name__ == '__main__':
     print(access_token)
